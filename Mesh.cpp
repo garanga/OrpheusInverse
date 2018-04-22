@@ -36,6 +36,12 @@ Mesh::addElement(Element* element)
     _elements.push_back(element);
 }
 
+void
+Mesh::addElementSet(ElementSet* elementSet)
+{
+    _elementSets.push_back(elementSet);
+}
+
 std::vector<Node*>
 Mesh::getNodes() const
 {
@@ -52,4 +58,10 @@ std::vector<Element*>
 Mesh::getElements() const
 {
     return _elements;
+}
+
+std::vector<ElementSet*>
+Mesh::getElementSets() const
+{
+    return _elementSets;
 }

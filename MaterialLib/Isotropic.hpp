@@ -17,6 +17,7 @@ class Isotropic : public Material
 public:
 
     Isotropic(std::string, double, double);
+
    ~Isotropic();
 
     double

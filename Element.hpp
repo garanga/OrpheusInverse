@@ -29,8 +29,12 @@ public:
     int*
     getConnect() const;
 
+    Material*
+    getMaterial() const;
+
     ElementType*
     getType() const;
+
 
 private:
 

@@ -26,6 +26,8 @@
 #include "Node.hpp"
 #include "Element.hpp"
 
+#include "ElementSet.hpp"
+
 #include "Element.hpp"
 #include "ElementLib/P4.hpp"
 

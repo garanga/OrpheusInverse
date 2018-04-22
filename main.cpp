@@ -35,6 +35,7 @@ int main()
 
     Model* model = new Model(modelName);
 
+    // Base material
     Material* material;
     material = new Isotropic(materialName, 200.0e9, 0.25);
 
@@ -45,9 +46,15 @@ int main()
 
     model->importMeshFromK(path,material,elementType);
 
-//    Mesh* mesh = model->getMesh();
+    Mesh* mesh = model->getMesh();
 //    std::cout << mesh->getNodes().size() << std::endl;
 //    std::cout << mesh->getElements().size() << std::endl;
+//    std::cout << mesh->getElementSets().size() << std::endl;
+//    std::cout << mesh->getElementSets()[0]->getName() << std::endl;
+//    std::cout << mesh->getElementSets()[1]->getName() << std::endl;
+
+    std::cout << mesh->getElements()[10 ]->getMaterial() << std::endl;
+    std::cout << mesh->getElements()[101]->getMaterial() << std::endl;
 
     // Boundary conditions
 
@@ -112,42 +119,10 @@ int main()
     Job* job = new Job(jobName, model);
     Odb* odb = job->submit();
 
+    std::cout << odb->getField(Symbol::Output::U)[2*20100  ] << std::endl;
+    std::cout << odb->getField(Symbol::Output::U)[2*20100+1] << std::endl;
+
     exportToVtp(odb);
-
-//    std::vector<double> disp = odb->getField(Symbol::Output::U);
-//
-//    for (auto it=disp.begin(); it<disp.end(); std::advance(it,2))
-//    {
-//        std::cout << *(it) << "\t" << *(it+1) << std::endl;
-//    }
-
-
-
-
-
-//        mdb->createJob(jobName, model);
-//
-
-//
-
-
-//    }
-//
-//    catch (OrpheusException::Exception& exception)
-//    {
-//        std::cout << "Exception occur \n";
-//        std::cout << exception.what() << std::endl;
-//    }
-
-
-
-    //
-//    delete mdb;
-//
-////    std::cout << "Finish" << std::endl;
-//
-//    // Test vtk visualization and vtp export
-////    importToVtp("Job_1-Output.txt");
 
     return 0;
 }
