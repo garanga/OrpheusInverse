@@ -90,6 +90,7 @@ Solver::calcGlobK() const
             for (int j=0; j<elementNodesNum; j++)
             {
                 l = connect[j];
+//                std::cout << (*it)->getType()->getMaterial()->getYoung() << std::endl;
                 locK = (*it)->getType()->calcLocK(i,j,nodesCoordGlob);
 
                 triplets.push_back(T(2*k  ,2*l  ,locK(0,0)));

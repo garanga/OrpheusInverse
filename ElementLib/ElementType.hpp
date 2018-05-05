@@ -13,6 +13,8 @@ using namespace Eigen;
 
 #include <string>
 
+class Material;
+
 // A base class for all the classes representing finite elements
 
 class ElementType
@@ -23,6 +25,10 @@ public:
      virtual
     ~ElementType();
 
+     virtual void
+     modfMaterial(Material*) = 0;
+
+
     std::string
     getName() const;
 
@@ -31,6 +37,10 @@ public:
 
     int
     getNodesNum() const;
+
+    virtual
+    Material*
+    getMaterial() const = 0;
 
     virtual
     Matrix<double,2,2>

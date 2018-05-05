@@ -19,6 +19,7 @@ class Load;
 
 namespace Symbol
 {
+    enum class ElementType;
     enum class DisplacementConstraint;
     enum class ConcentratedForce;
 }
@@ -37,7 +38,7 @@ public:
 
     // A method for importing a Mesh from LS-PrePost k-file
     void
-    importMeshFromK(std::string,Material*,ElementType*);
+    importMeshFromK(std::string,Material*,Symbol::ElementType);
 
     void
     createConstraint(std::string                   ,

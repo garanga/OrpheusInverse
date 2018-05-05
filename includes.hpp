@@ -8,9 +8,11 @@
 #ifndef INCLUDES_HPP_
 #define INCLUDES_HPP_
 
+#include <cmath>
 #include <ctime>
 #include <iostream>
 #include <fstream>
+#include <map>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -25,6 +27,8 @@
 #include "Mesh.hpp"
 #include "Node.hpp"
 #include "Element.hpp"
+
+#include "ElementSet.hpp"
 
 #include "Element.hpp"
 #include "ElementLib/P4.hpp"

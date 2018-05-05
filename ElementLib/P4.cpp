@@ -7,11 +7,12 @@
 
 #include "P4.hpp"
 
-#include <cmath>
-using std::sqrt;
-#include <iostream>
+#include "../includes.hpp"
 
-P4:: P4(double young, double poisson, bool isPlainStrain)
+using std::sqrt;
+
+P4:: P4(Material* material, bool isPlainStrain)
+    : _material(material), _isPlainStrain(isPlainStrain)
 {
     _name       = "P4";
     _dimension  = 2;
@@ -26,21 +27,7 @@ P4:: P4(double young, double poisson, bool isPlainStrain)
     _delta = new double[4];
     _delta[0] =  1.0; _delta[1] = -1.0; _delta[2] = 1.0; _delta[3] = -1.0;
 
-    // exy is doubled
-    if (!isPlainStrain)
-    {
-        _D(0,0) = 1.0    ; _D(0,1) = poisson; _D(0,2) = 0.0;
-        _D(1,0) = poisson; _D(1,1) = 1.0    ; _D(1,2) = 0.0;
-        _D(2,0) = 0.0    ; _D(2,1) = 0.0    ; _D(2,2) = (1.0-poisson)/2.0;
-        _D *= young/(1.0-pow(poisson,2));
-    }
-    else
-    {
-        _D(0,0) = 1.0-poisson; _D(0,1) = poisson    ; _D(0,2) = 0.0;
-        _D(1,0) = poisson    ; _D(1,1) = 1.0-poisson; _D(1,2) = 0.0;
-        _D(2,0) = 0.0        ; _D(2,1) = 0.0        ; _D(2,2) = (1.0-2.0*poisson)/2.0;
-        _D *= young/((1.0+poisson)*(1.0-2.0*poisson));
-    } /* plainStrain */
+    updateD();
 
 
     _quadraturePoints << -1.0/sqrt(3.0), 1.0/sqrt(3.0), 1.0/sqrt(3.0), -1.0/sqrt(3.0),
@@ -60,6 +47,49 @@ P4::~P4()
     delete [] _beta ;
     delete [] _gamma;
     delete [] _delta;
+}
+
+Material*
+P4::getMaterial() const
+{
+    return _material;
+}
+
+void
+P4::updateD()
+{
+
+    double young   = _material->getYoung();
+    double poisson = _material->getPoisson();
+
+    // exy is doubled
+    if (!_isPlainStrain)
+    {
+        _D(0,0) = 1.0    ; _D(0,1) = poisson; _D(0,2) = 0.0;
+        _D(1,0) = poisson; _D(1,1) = 1.0    ; _D(1,2) = 0.0;
+        _D(2,0) = 0.0    ; _D(2,1) = 0.0    ; _D(2,2) = (1.0-poisson)/2.0;
+        _D *= young/(1.0-pow(poisson,2));
+    }
+    else
+    {
+        _D(0,0) = 1.0-poisson; _D(0,1) = poisson    ; _D(0,2) = 0.0;
+        _D(1,0) = poisson    ; _D(1,1) = 1.0-poisson; _D(1,2) = 0.0;
+        _D(2,0) = 0.0        ; _D(2,1) = 0.0        ; _D(2,2) = (1.0-2.0*poisson)/2.0;
+        _D *= young/((1.0+poisson)*(1.0-2.0*poisson));
+    } /* plainStrain */
+}
+
+void
+P4::modfMaterial(Material* material)
+{
+    delete _material;
+
+    Material* materialTmp = new Isotropic(material->getName(),
+                                          material->getYoung(),
+                                          material->getPoisson());
+
+    _material = materialTmp;
+    updateD();
 }
 
 /*!

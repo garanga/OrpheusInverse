@@ -1,94 +1,57 @@
 $# LS-PrePost command file created by LS-PrePost(R) V4.5.7 - 05Dec2017 -64bit-Linux
-$# Created on Mar-31-2018 (15:40:08)
-mesh2d sketchboard on
-mesh2d sbup
-mesh2d createrpoint 1 -10.000000 -10.000000
-mesh2d createrpoint 2 10.000000 -10.000000
-mesh2d createrpoint 3 10.000000 10.000000
-mesh2d createrpoint 4 -10.000000 10.000000
-mesh2d createline 5 1 2
-ac
-mesh2d createline 6 2 3
-mesh2d createline 7 3 4
-mesh2d createline 8 4 1
-mesh2d createedge 9 1 2 5 
-mesh2d createedge 10 2 3 6 
-mesh2d createedge 11 3 4 7 
-mesh2d createedge 12 4 1 8 
-mesh2d elemonedge 9 20 
-mesh2d elemonedge 10 20 
-mesh2d elemonedge 11 20 
-mesh2d elemonedge 12 20 
-mesh2d freemesh 11 12 9 10 1
-mesh2d acceptmesh 1 
-ac
-mesh2d sbdown
-isometric x
+$# Created on Apr-15-2018 (11:14:19)
+open keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost200.k"
+Message 1
+save keywordoutversion 9
+Message 0
 ident select 1
 genselect target node
+genselect target element
+ident echo off
+ident echo off
+genselect element add box in -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+genselect label on
+genselect element add box in -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+genselect label off
+ident echo on
+genselect element add shell 21369/0 
+ident echo off
+genselect element add box in -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+genselect element add box in -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+genselect element add box out -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+genselect unsel
+genselect unsel
+ident locate
 genselect whole
+genselect adjacent
+genselect element add box out -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+genselect element add box in -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+genselect element add box in -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+genselect unsel
+genselect element add box in -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+genselect element add box in -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+genselect element add box in -5.000000 -5.000000 0.000000 5.000000 5.000000 0.000000
+ident echo off
+ident echo off
+genselect element add circle2 in N26122 5 0 0 1 -1
+genselect element add circle2 in 0 0 0 5 0 0 1 -1
+genselect unsel
+genselect unsel
+genselect unsel
+genselect element add circle2 in 0.1 0 0 5 0 0 1 -1
+genselect unsel
+genselect element add circle2 in 5.1 0 0 5 0 0 1 -1
+genselect unsel
+genselect element add circle2 in 0 0 0 2 0 0 1 -1
+genselect unsel
+genselect element add circle2 in 0 0 0 2 0 0 1 -1
+genselect save file "/home/pavel/Desktop/123.g"
+loadstate 1;
+loadquat -0.138241 0.918954 -0.369087 0.013738;
+loadgrot 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 ;
+loadzoom 1.262976;
+loadpan 2.118628 1.887619;
+loadeyepos 0.000000 0.000000 0.000000;
+loadupvect 0.000000 1.000000 0.000000;
+genselect part add circle in 0.689927 0.472050 0.689927 0.472050
 ident select 0
-ident select 0
-save keywordabsolute 0
-save keywordbylongfmt 0
-save outversion 7
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save keyword /home/pavel/workspace/OrpheusInverse/LS_PrePost2.k 
-save outversion 0
-save keywordabsolute 0
-save keywordbylongfmt 0
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save outversion 1
-save keywordabsolute 0
-save keywordbylongfmt 0
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save outversion 2
-save keywordabsolute 0
-save keywordbylongfmt 0
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save outversion 3
-save keywordabsolute 0
-save keywordbylongfmt 0
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save outversion 4
-save keywordabsolute 0
-save keywordbylongfmt 0
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save outversion 5
-save keywordabsolute 0
-save keywordbylongfmt 0
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save outversion 6
-save keywordabsolute 0
-save keywordbylongfmt 0
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save outversion 9
-save keywordabsolute 0
-save keywordbylongfmt 0
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save config
-refcheck output
-save keywordabsolute 0
-save keywordbylongfmt 0
-refcheck outputfile "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-refcheck outputfileclear
-save keywordabsolute 0
-save keywordbylongfmt 0
-save outversion 7
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save keywordabsolute 0
-save keywordbylongfmt 0
-save outversion 7
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save keywordabsolute 0
-save keywordbylongfmt 0
-save outversion 7
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save keywordabsolute 0
-save keywordbylongfmt 0
-save outversion 7
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"
-save keywordabsolute 0
-save keywordbylongfmt 0
-save outversion 7
-save keyword "/home/pavel/workspace/OrpheusInverse/LS_PrePost2.k"

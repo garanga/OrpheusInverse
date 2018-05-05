@@ -36,9 +36,9 @@ Model::~Model()
 //}
 
 void
-Model::importMeshFromK(std::string  path,
-                       Material*    material,
-                       ElementType* elementType)
+Model::importMeshFromK(std::string         path,
+                       Material*           material,
+                       Symbol::ElementType elementTypeSymbol)
 {
     _mesh = new Mesh();
 
@@ -56,6 +56,7 @@ Model::importMeshFromK(std::string  path,
     std::string line;
     std::size_t pos ;
 
+    // Searching for nodes
     while(std::getline(fin,line))
     {
 
@@ -123,16 +124,26 @@ Model::importMeshFromK(std::string  path,
 
                     iss >> par1 >> par2 >> par3 >> par4 >> par5 >> par6;
 
-                    eid      = std::stoi(par1);
+                    eid      = std::stoi(par1)-1;
                     connectivity[0] = std::stod(par3)-1;
                     connectivity[1] = std::stod(par4)-1;
                     connectivity[2] = std::stod(par5)-1;
                     connectivity[3] = std::stod(par6)-1;
 
+                    Material* materialTmp = new Isotropic(material->getName(),
+                                                          material->getYoung(),
+                                                          material->getPoisson());
+
+                    ElementType* elementTypeTmp;
+                    switch (elementTypeSymbol)
+                    {
+                        case Symbol::ElementType::P4:
+                            elementTypeTmp = new P4(materialTmp);
+                    }
+
                     element = new Element(eid,
                                           connectivity,
-                                          material,
-                                          elementType);
+                                          elementTypeTmp);
 
                     _mesh->addElement(element);
 
@@ -148,6 +159,70 @@ Model::importMeshFromK(std::string  path,
         }
 
     }
+
+    fin.clear();
+    fin.seekg(0, std::ios::beg);
+
+    // Searching for element sets
+    while(std::getline(fin,line))
+    {
+        // Is the line contains *SET_SHELL_LIST keyword
+        pos = line.find("*SET_SHELL_LIST_TITLE");
+        if (pos!=std::string::npos) // Bingo
+        {
+            // Read name and create empty ElementSet
+            std::getline(fin,line);
+
+            std::istringstream iss(line);
+            std::string name;
+
+            iss >> name;
+
+            ElementSet* elementSet = new ElementSet(name);
+
+            // Read one line what does't contain any necessary information
+            std::getline(fin,line);
+
+            // Fill the elementSet
+            std::ios::pos_type posCurrent;
+            while(getline(fin,line))
+            {
+                pos = line.find("*");
+
+                if (pos==std::string::npos)
+                {
+
+//                    std::cout << line << std::endl;
+
+                    posCurrent = fin.tellg();
+
+                    std::istringstream iss(line);
+                    std::string par1,par2,par3,par4,par5,par6,par7,par8;
+
+                    iss >> par1 >> par2 >> par3 >> par4 >> par5 >> par6 >> par7 >> par8;
+
+                    elementSet->addId(std::stoi(par1)-1);
+                    elementSet->addId(std::stoi(par2)-1);
+                    elementSet->addId(std::stoi(par3)-1);
+                    elementSet->addId(std::stoi(par4)-1);
+                    elementSet->addId(std::stoi(par5)-1);
+                    elementSet->addId(std::stoi(par6)-1);
+                    elementSet->addId(std::stoi(par7)-1);
+                    elementSet->addId(std::stoi(par8)-1);
+
+                }
+                else
+                {
+                    _mesh->addElementSet(elementSet);
+                    fin.seekg(posCurrent);
+                    break;
+                }
+            }
+        }
+
+    }
+
+
 
     fin.close();
 

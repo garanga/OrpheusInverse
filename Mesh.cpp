@@ -36,6 +36,12 @@ Mesh::addElement(Element* element)
     _elements.push_back(element);
 }
 
+void
+Mesh::addElementSet(ElementSet* elementSet)
+{
+    _elementSets[elementSet->getName()] = elementSet;
+}
+
 std::vector<Node*>
 Mesh::getNodes() const
 {
@@ -48,8 +54,31 @@ Mesh::getNodesNum() const
     return _nodes.size();
 }
 
+Element*
+Mesh::getElement(int id) const
+{
+    auto it = std::find_if(_elements.begin(),_elements.end(),
+                  [&id](Element* element)
+                  {
+                         return element->getId() == id;
+                  });
+    return *it;
+}
+
 std::vector<Element*>
 Mesh::getElements() const
 {
     return _elements;
+}
+
+ElementSet*
+Mesh::getElementSet(std::string name) const
+{
+    return _elementSets.at(name);
+}
+
+std::map<std::string,ElementSet*>
+Mesh::getElementSets() const
+{
+    return _elementSets;
 }

@@ -15,6 +15,7 @@ class Material
 public:
 
      Material(std::string);
+
      virtual
     ~Material();
 

@@ -11,6 +11,11 @@
 namespace Symbol
 {
 
+    enum class ElementType
+    {
+        P4
+    };
+
     enum class DisplacementConstraint
     {
         UX = 1 << 0,

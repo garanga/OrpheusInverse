@@ -17,7 +17,7 @@ public:
 
      Element();
      explicit
-     Element(int, int*, Material*,ElementType*);
+     Element(int, int*, ElementType*);
     ~Element();
 
     void
@@ -32,11 +32,11 @@ public:
     ElementType*
     getType() const;
 
+
 private:
 
     int          _id;
     int*         _connect;
-    Material*    _material;
     ElementType* _type;
 };
 

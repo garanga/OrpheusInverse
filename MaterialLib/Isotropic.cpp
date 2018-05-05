@@ -14,9 +14,9 @@ Isotropic::Isotropic(std::string name, double young, double poisson)
     : Material(name),
       _young(young), _poisson(poisson)
 {
-    std::cout << "An isotropic material is created" << std::endl;
-    std::cout << "\t" << "Material name is " << _name << std::endl;
-    std::cout << std::endl;
+//    std::cout << "An isotropic material is created" << std::endl;
+//    std::cout << "\t" << "Material name is " << _name << std::endl;
+//    std::cout << std::endl;
 }
 
 Isotropic::~Isotropic()

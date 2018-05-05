@@ -98,21 +98,21 @@ pdo = self.GetOutput()
 
 pdo.ShallowCopy(pdi)
 
-pointsNum = input.GetNumberOfPoints()
+pointsNum = pdi.GetNumberOfPoints()
 newPoints = vtk.vtkPoints()
 
 for i in range(0, pointsNum):
     coord = pdi.GetPoint(i)
     x, y, z = coord[:3]
-    dx = input.GetPointData().GetArray(0).GetValue(2*i  )
-    dy = inptu.GetPointData().GetArray(0).GetValue(2*i+1)
+    dx = pdi.GetPointData().GetArray(0).GetValue(2*i  )
+    dy = pdi.GetPointData().GetArray(0).GetValue(2*i+1)
     dz = 0
     x += scaleFactor*dx
     y += scaleFactor*dy
     z += scaleFactor*dz
     newPoints.InsertPoint(i, x, y, z)
 
-pdo.SetPoints(newPoints)
+    pdo.SetPoints(newPoints)
 */
 
 

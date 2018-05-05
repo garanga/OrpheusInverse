@@ -13,16 +13,24 @@
 #include <Eigen/Dense>
 using namespace Eigen;
 
+class Material;
+
 class P4 : public ElementType
 {
 public:
 
-    P4(double, double, bool=false);
+    P4(Material*, bool=false);
    ~P4();
 
     // A method returns a stiffness matrix K:
     // the integral over the domain occupied by an element of
     // a quantity B(i,...).transpose()*D*B(j,...)
+
+    void
+    modfMaterial(Material*);
+
+    Material*
+    getMaterial() const;
 
     Matrix<double,2,2>
     calcLocK(int,int, Matrix<double,2,4>&) const;
@@ -30,9 +38,10 @@ public:
     // A method returns an elastic matrix D
     Matrix<double,3,3> getD() const;
 
-//    void updateForce(Matrix<double,2,4>&, VectorXd&, VectorXd&) const;
-
 private:
+
+    Material* _material;
+    bool      _isPlainStrain;
 
     double* _alpha;
     double* _beta ;
@@ -43,6 +52,9 @@ private:
 
     Matrix<double,2,4> _quadraturePoints ;
     Matrix<double,1,4> _quadratureWeights;
+
+    void
+    updateD();
 
     // A method returns a shape function corresponded to node \f$ I \f$
     // calculated in a point \f$ (\xi,\eta) \f$ in the local coordinates
