@@ -43,17 +43,27 @@ public:
     std::vector<Element*>
     getElements() const;
 
+<<<<<<< HEAD
     ElementSet*
     getElementSet(std::string) const;
 
     std::map<std::string,ElementSet*>
+=======
+    std::vector<ElementSet*>
+>>>>>>> branch 'master' of https://github.com/garanga/OrpheusInverse.git
     getElementSets() const;
 
 private:
 
+<<<<<<< HEAD
     std::vector <Node*>                _nodes;
     std::vector <Element*>             _elements;
     std::map <std::string,ElementSet*> _elementSets;
+=======
+    std::vector <Node*>       _nodes;
+    std::vector <Element*>    _elements;
+    std::vector <ElementSet*> _elementSets;
+>>>>>>> branch 'master' of https://github.com/garanga/OrpheusInverse.git
 
 };
 

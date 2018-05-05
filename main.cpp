@@ -36,8 +36,13 @@ int main()
     Model* model = new Model(modelName);
 
     // Base material
+<<<<<<< HEAD
     Material* material1;
     material1 = new Isotropic(materialName, 200.0e9, 0.25);
+=======
+    Material* material;
+    material = new Isotropic(materialName, 200.0e9, 0.25);
+>>>>>>> branch 'master' of https://github.com/garanga/OrpheusInverse.git
 
     // Element Type
     Symbol::ElementType elementTypeSymbol;
@@ -48,6 +53,7 @@ int main()
     model->importMeshFromK(path,material1,elementTypeSymbol);
     Mesh* mesh = model->getMesh();
 
+<<<<<<< HEAD
     Material* material2;
     material2 = new Isotropic("Void", 2.0e9, 0.25);
 
@@ -65,6 +71,17 @@ int main()
         }
 
     }
+=======
+    Mesh* mesh = model->getMesh();
+//    std::cout << mesh->getNodes().size() << std::endl;
+//    std::cout << mesh->getElements().size() << std::endl;
+//    std::cout << mesh->getElementSets().size() << std::endl;
+//    std::cout << mesh->getElementSets()[0]->getName() << std::endl;
+//    std::cout << mesh->getElementSets()[1]->getName() << std::endl;
+
+    std::cout << mesh->getElements()[10 ]->getMaterial() << std::endl;
+    std::cout << mesh->getElements()[101]->getMaterial() << std::endl;
+>>>>>>> branch 'master' of https://github.com/garanga/OrpheusInverse.git
 
     // Boundary conditions
 

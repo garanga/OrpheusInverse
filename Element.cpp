@@ -52,6 +52,12 @@ Element::getConnect() const
      return _connect;
 }
 
+Material*
+Element::getMaterial() const
+{
+    return _material;
+}
+
 ElementType*
 Element::getType() const
 {

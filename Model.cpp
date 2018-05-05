@@ -130,6 +130,7 @@ Model::importMeshFromK(std::string         path,
                     connectivity[2] = std::stod(par5)-1;
                     connectivity[3] = std::stod(par6)-1;
 
+<<<<<<< HEAD
                     Material* materialTmp = new Isotropic(material->getName(),
                                                           material->getYoung(),
                                                           material->getPoisson());
@@ -140,10 +141,20 @@ Model::importMeshFromK(std::string         path,
                         case Symbol::ElementType::P4:
                             elementTypeTmp = new P4(materialTmp);
                     }
+=======
+                    Material* materialActual = new Isotropic(material->getName(),
+                                                             material->getYoung(),
+                                                             material->getPoisson());
+>>>>>>> branch 'master' of https://github.com/garanga/OrpheusInverse.git
 
                     element = new Element(eid,
                                           connectivity,
+<<<<<<< HEAD
                                           elementTypeTmp);
+=======
+                                          materialActual,
+                                          elementType);
+>>>>>>> branch 'master' of https://github.com/garanga/OrpheusInverse.git
 
                     _mesh->addElement(element);
 
@@ -192,7 +203,11 @@ Model::importMeshFromK(std::string         path,
                 if (pos==std::string::npos)
                 {
 
+<<<<<<< HEAD
 //                    std::cout << line << std::endl;
+=======
+                    std::cout << line << std::endl;
+>>>>>>> branch 'master' of https://github.com/garanga/OrpheusInverse.git
 
                     posCurrent = fin.tellg();
 

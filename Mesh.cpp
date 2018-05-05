@@ -39,7 +39,11 @@ Mesh::addElement(Element* element)
 void
 Mesh::addElementSet(ElementSet* elementSet)
 {
+<<<<<<< HEAD
     _elementSets[elementSet->getName()] = elementSet;
+=======
+    _elementSets.push_back(elementSet);
+>>>>>>> branch 'master' of https://github.com/garanga/OrpheusInverse.git
 }
 
 std::vector<Node*>
@@ -71,6 +75,7 @@ Mesh::getElements() const
     return _elements;
 }
 
+<<<<<<< HEAD
 ElementSet*
 Mesh::getElementSet(std::string name) const
 {
@@ -78,6 +83,9 @@ Mesh::getElementSet(std::string name) const
 }
 
 std::map<std::string,ElementSet*>
+=======
+std::vector<ElementSet*>
+>>>>>>> branch 'master' of https://github.com/garanga/OrpheusInverse.git
 Mesh::getElementSets() const
 {
     return _elementSets;
